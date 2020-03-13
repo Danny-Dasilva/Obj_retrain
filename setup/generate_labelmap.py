@@ -1,6 +1,6 @@
 
 import os
-path = '/images/train_labels.csv'
+path = 'images/train_labels.csv'
 
 
 
@@ -16,7 +16,7 @@ with open(path, newline='') as csvfile:
 
 classes = list(set(col))
 
-print(classes)
+print("classes:", *classes)
 count = 0
 with open("training/labelmap.pbtxt","w") as pbtxt_label:
     for label in classes:

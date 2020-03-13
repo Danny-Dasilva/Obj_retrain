@@ -12,6 +12,7 @@ ENV PYENV_ROOT $HOME/.pyenv
 RUN apt-get update && apt-get upgrade -y \
  && apt-get install -y \
     gdebi \
+    nano \
     git \
     make \
     build-essential \

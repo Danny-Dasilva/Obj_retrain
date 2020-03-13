@@ -33,7 +33,7 @@ dictionary = {}
 
 def decompileLabelMap():
     global dictionary
-    with open("labelmap.pbtxt") as f:
+    with open("training/labelmap.pbtxt") as f:
         content = f.readlines()
         ids = []
         names = []
@@ -44,6 +44,7 @@ def decompileLabelMap():
                 result = i.split('\'')
                 names.append(result[1])
         dictionary = dict(zip(names, ids))
+        print(dictionary, "labels")
    
 
 def class_text_to_int(row_label):
