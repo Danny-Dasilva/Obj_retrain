@@ -5,7 +5,7 @@ run docker container
 
 
 ```
-python docker run --name edgetpu-detect \
+docker run --name edgetpu-detect \
 --rm -it --privileged -p 6006:6006 \
 --mount type=bind,src=${DETECT_DIR},dst=/models/research/object_detection/images \
 --gpus all \
