@@ -67,18 +67,24 @@ RUN cd /models/research && \
 ENV PYTHONPATH $PYTHONPATH:/models/research:/models/research/slim
 #CMD export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 
-Run mkdir /models/research/training
-Run cp Obj_retrain/setup/pipeline.config models/research/training
-Run cp Obj_retrain/setup/labelmap.pbtxt models/research/training
+Run mkdir models/research/object_detection/training
+Run cp Obj_retrain/setup/pipeline.config models/research/object_detection/training
+Run cp Obj_retrain/setup/labelmap.pbtxt models/research/object_detection/training
 
-Run cp Obj_retrain/setup/generate_tfrecord.py models/research/
-Run cp Obj_retrain/setup/xml_to_csv.py models/research/
+Run cp Obj_retrain/setup/generate_tfrecord.py models/research/object_detection/
+Run cp Obj_retrain/setup/xml_to_csv.py models/research/object_detection/
 
-Run cp Obj_retrain/setup/pipeline.config models/research/training
-Run cp -r Obj_retrain/setup/ssd_mobilenet_v2_quantized_300x300 models/research/
+Run cp -r Obj_retrain/setup/ssd_mobilenet_v2_quantized_300x300 models/research/object_detection/
+
+
+Run rm -rf models/research/pycocotools/cocoeval.py
+Run rm -rf models/research/object_detection/metrics/coco_tools.py
+Run cp Obj_retrain/setup/coco_tools.py models/research/object_detection/metrics/
+Run cp Obj_retrain/setup/cocoeval.py models/research/pycocotools/
+
 # COPY utils/create_tf_record.py /models/research/object_detection/dataset_tools/ 
 # COPY utils/shell_script /models/reserach/.
-ARG work_dir=/models/research
+ARG work_dir=/models/research/object_detection
 
 # edge tpu compiler installation
 RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
