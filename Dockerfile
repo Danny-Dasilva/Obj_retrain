@@ -55,6 +55,7 @@ RUN apt-get install -y protobuf-compiler python-pil python-lxml python-tk
 RUN pip install --user Cython contextlib2 pillow lxml matplotlib
 
 RUN git clone https://github.com/tensorflow/models.git
+Run git clone https://github.com/Danny-Dasilva/Obj_retrain.git
 
 RUN git clone https://github.com/cocodataset/cocoapi.git && \
     cd cocoapi/PythonAPI && \
@@ -67,6 +68,15 @@ RUN cd /models/research && \
 ENV PYTHONPATH $PYTHONPATH:/models/research:/models/research/slim
 #CMD export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 
+Run mkdir /models/research/training
+Run cp Obj_retrain/setup/pipeline.config models/research/training
+Run cp Obj_retrain/setup/labelmap.pbtxt models/research/training
+
+Run cp Obj_retrain/setup/generate_tfrecord.py models/research/
+Run cp Obj_retrain/setup/xml_to_csv.py models/research/
+
+Run cp Obj_retrain/setup/pipeline.config models/research/training
+Run cp -r Obj_retrain/setup/ssd_mobilenet_v2_quantized_300x300 models/research/
 # COPY utils/create_tf_record.py /models/research/object_detection/dataset_tools/ 
 # COPY utils/shell_script /models/reserach/.
 ARG work_dir=/models/research
