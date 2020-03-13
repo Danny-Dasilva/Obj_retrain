@@ -44,7 +44,6 @@ RUN dpkg -i libcudnn7-dev_7.5.0.56-1+cuda10.0_amd64.deb
 
 # tensorflow and object detection api installation
 RUN pip install tensorflow-gpu==1.14
-RUN pip install pandas
 RUN mkdir /protoc_3.3 && \
     cd protoc_3.3 && \
     wget https://github.com/google/protobuf/releases/download/v3.3.0/protoc-3.3.0-linux-x86_64.zip && \
@@ -52,7 +51,7 @@ RUN mkdir /protoc_3.3 && \
     unzip protoc-3.3.0-linux-x86_64.zip
 
 RUN apt-get install -y protobuf-compiler python-pil python-lxml python-tk
-RUN pip install --user Cython contextlib2 pillow lxml matplotlib
+RUN pip install --user Cython contextlib2 pillow lxml matplotlib pandas
 
 RUN git clone https://github.com/tensorflow/models.git
 Run git clone https://github.com/Danny-Dasilva/Obj_retrain.git
