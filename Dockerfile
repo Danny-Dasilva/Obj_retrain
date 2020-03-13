@@ -69,7 +69,7 @@ ENV PYTHONPATH $PYTHONPATH:/models/research:/models/research/slim
 
 Run mkdir models/research/object_detection/training
 Run cp Obj_retrain/setup/pipeline.config models/research/object_detection/training
-Run cp Obj_retrain/setup/labelmap.pbtxt models/research/object_detection/training
+Run cp Obj_retrain/setup/generate_labelmap.py models/research/object_detection
 
 Run cp Obj_retrain/setup/generate_tfrecord.py models/research/object_detection/
 Run cp Obj_retrain/setup/xml_to_csv.py models/research/object_detection/

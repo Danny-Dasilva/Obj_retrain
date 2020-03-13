@@ -1,22 +1,26 @@
 """
 Usage:
-  # From tensorflow/models/
+  # In local folder
   # Create train data:
-  python generate_tfrecord.py --csv_input=images/train_labels.csv --image_dir=images/train --output_path=train.record
+  python generate_tfrecord.py --csv_input=CSGO_images\train_labels.csv --image_dir=CSGO_images\train --output_path=CSGO_images\train.record
 
   # Create test data:
-  python generate_tfrecord.py --csv_input=images/test_labels.csv  --image_dir=images/test --output_path=test.record
+  python generate_tfrecord.py --csv_input=CSGO_images\test_labels.csv --image_dir=CSGO_images\test --output_path=CSGO_images\test.record
 """
 from __future__ import division
 from __future__ import print_function
 from __future__ import absolute_import
+import re
 
-import os
+import sys, os
 import io
 import pandas as pd
 import tensorflow as tf
 
 from PIL import Image
+
+
+
 from object_detection.utils import dataset_util
 from collections import namedtuple, OrderedDict
 
@@ -25,20 +29,29 @@ flags.DEFINE_string('csv_input', '', 'Path to the CSV input')
 flags.DEFINE_string('image_dir', '', 'Path to the image directory')
 flags.DEFINE_string('output_path', '', 'Path to output TFRecord')
 FLAGS = flags.FLAGS
+dictionary = {}
 
+def decompileLabelMap():
+    global dictionary
+    with open("labelmap.pbtxt") as f:
+        content = f.readlines()
+        ids = []
+        names = []
+        for i in content:
+            if "id" in i:
+                ids.append(int(re.search(r'\d+', i).group()))
+            elif "name" in i:
+                result = i.split('\'')
+                names.append(result[1])
+        dictionary = dict(zip(names, ids))
+   
 
-# TO-DO replace this with label map
 def class_text_to_int(row_label):
-    print(row_label, "label")
-    if row_label == 'outer_port':
-        return 1
-    elif row_label == 'inner_port':
-        return 2
-    elif row_label == 'bottom_port':
-        return 3
-    else:
-        print(row_label, "error")
-        None
+    try:
+        return dictionary[row_label]
+    except Exception as e:
+        print('error')
+        return None
 
 
 def split(df, group):
@@ -70,7 +83,8 @@ def create_tf_example(group, path):
         ymaxs.append(row['ymax'] / height)
         classes_text.append(row['class'].encode('utf8'))
         classes.append(class_text_to_int(row['class']))
-
+        
+        
     tf_example = tf.train.Example(features=tf.train.Features(feature={
         'image/height': dataset_util.int64_feature(height),
         'image/width': dataset_util.int64_feature(width),
@@ -89,6 +103,7 @@ def create_tf_example(group, path):
 
 
 def main(_):
+    decompileLabelMap()
     writer = tf.python_io.TFRecordWriter(FLAGS.output_path)
     path = os.path.join(os.getcwd(), FLAGS.image_dir)
     examples = pd.read_csv(FLAGS.csv_input)
