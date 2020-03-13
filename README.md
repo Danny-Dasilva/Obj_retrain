@@ -15,3 +15,5 @@ obj_detect
 tensorboard
 
 `sudo docker exec -it edgetpu-detect /bin/bash`
+
+`tensorboard --logdir=training`
