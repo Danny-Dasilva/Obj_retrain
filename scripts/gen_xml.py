@@ -11,7 +11,7 @@ dname = os.path.dirname(abspath)
 os.chdir(dname)
 
 # create a new XML file with the results
-print(dname)
+
 
 
 
