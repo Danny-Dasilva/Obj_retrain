@@ -4,7 +4,9 @@ build docker container
 
 
 export path 
+
 `DETECT_DIR=$PWD`
+
 run docker container
 
 
