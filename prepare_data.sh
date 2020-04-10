@@ -1,5 +1,7 @@
 export DOCKER_DIR=$PWD
 export WORKING_DIR="working"
+rm -rf ${WORKING_DIR}/test
+rm -rf ${WORKING_DIR}/train
 rm -rf ${WORKING_DIR}
 mkdir ${WORKING_DIR}
 cp -r put_json-imgs_here/* ${WORKING_DIR}

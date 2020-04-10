@@ -38,6 +38,7 @@ def decompileLabelMap():
         ids = []
         names = []
         for i in content:
+            print(i, "hello????")
             if "id" in i:
                 ids.append(int(re.search(r'\d+', i).group()))
             elif "name" in i:
@@ -51,7 +52,7 @@ def class_text_to_int(row_label):
     try:
         return dictionary[row_label]
     except Exception as e:
-        print('error')
+        print('error', e)
         return None
 
 

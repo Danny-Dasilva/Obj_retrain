@@ -7,6 +7,7 @@ import xml.etree.ElementTree as ET
 def xml_to_csv(path):
     xml_list = []
     for xml_file in glob.glob(path + '/*.xml'):
+        print(xml_file, path + '/*.xml')
         tree = ET.parse(xml_file)
         root = tree.getroot()
         for member in root.findall('object'):
@@ -28,6 +29,7 @@ def xml_to_csv(path):
         ymin = row['ymin']
         ymax = row['ymax']
         filename = row['filename']
+        print(row['class'], "filename")
         if xmin > xmax:
             df.loc[index, 'xmin'] = xmax
             df.loc[index, 'xmax'] = xmin
@@ -45,6 +47,8 @@ def xml_to_csv(path):
 def main():
     for folder in ['train','test']:
         image_path = os.path.join(os.getcwd(), ('images/' + folder))
+        print('images/' + folder)
+        print("wtf bro")
         xml_df = xml_to_csv(image_path)
         for index, row in xml_df.iterrows():
             xmin = row['xmin']
