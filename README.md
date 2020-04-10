@@ -1,10 +1,13 @@
 build docker container
+
 `sudo docker build ./ -t obj_detect`
 
 
 
 export path 
+
 `DETECT_DIR=$PWD`
+
 run docker container
 
 
