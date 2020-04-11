@@ -75,6 +75,10 @@ Run cp Obj_retrain/setup/generate_labelmap.py models/research/object_detection
 Run cp Obj_retrain/setup/generate_tfrecord.py models/research/object_detection/
 Run cp Obj_retrain/setup/xml_to_csv.py models/research/object_detection/
 
+
+Run cp Obj_retrain/setup/export_tflite_ssd_graph.py models/research/object_detection/
+Run cp Obj_retrain/setup/constants.sh models/research/object_detection/
+
 Run cp -r Obj_retrain/setup/ssd_mobilenet_v2_quantized_300x300 models/research/object_detection/
 
 
