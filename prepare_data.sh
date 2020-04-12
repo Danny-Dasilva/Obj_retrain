@@ -1,7 +1,7 @@
 export DOCKER_DIR=$PWD
 export WORKING_DIR="working"
-rm -rf ${WORKING_DIR}/test
-rm -rf ${WORKING_DIR}/train
+rm -rf ${DOCKER_DIR}/test
+rm -rf ${DOCKER_DIR}/train
 rm -rf ${WORKING_DIR}
 mkdir ${WORKING_DIR}
 cp -r put_json-imgs_here/* ${WORKING_DIR}
@@ -22,6 +22,7 @@ mkdir ${XML_DIR}/train
 mkdir ${XML_DIR}/test
 export TRAIN=${XML_DIR}/train
 export TEST=${XML_DIR}/test
+
 python3 ${XML_DIR}/split.py
 
 cp -r ${TRAIN} ${DOCKER_DIR}

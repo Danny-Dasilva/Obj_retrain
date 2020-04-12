@@ -92,9 +92,10 @@ Run cp Obj_retrain/setup/cocoeval.py models/research/pycocotools/
 ARG work_dir=/models/research/object_detection
 
 # edge tpu compiler installation
+
 RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 RUN echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list
 RUN apt-get update
-RUN apt-get install -y edgetpu
+RUN apt-get install -y edgetpu-compiler
 
 WORKDIR ${work_dir}
