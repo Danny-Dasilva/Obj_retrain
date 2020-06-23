@@ -62,9 +62,8 @@ for obj in data:
         depth = add_element(size,'depth',  '3')
 
 
-        segmented = ET.SubElement(annotation, 'segmented')
-        segmented.text = '0'
-
+        
+        segmented = add_element(annotation,'segmented',  '0')
 
 
         img_width = 640
@@ -85,28 +84,35 @@ for obj in data:
                 ymin, ymax = ymax, ymin
             
 
-            obj = ET.SubElement(annotation, 'object')
-            name = ET.SubElement(obj, 'name')
-            name.text = shape_name
-            pose = ET.SubElement(obj, 'pose')
-            pose.text = 'Unspecified'
-            truncated = ET.SubElement(obj, 'truncated')
-            truncated.text = '0'
-            difficult = ET.SubElement(obj, 'difficult')
-            difficult.text = '0'
+            obj = add_element(annotation,'object',  '')
 
-            bndbox = ET.SubElement(obj, 'bndbox')
-            dom_xmin = ET.SubElement(bndbox, 'xmin')
-            dom_xmin.text = str(xmin)
+           
+            name = add_element(obj,'name',  shape_name)
 
-            dom_ymin = ET.SubElement(bndbox, 'ymin')
-            dom_ymin.text = str(ymin)
+            pose = add_element(obj,'pose',  'Unspecified')
 
-            dom_xmax = ET.SubElement(bndbox, 'xmax')
-            dom_xmax.text = str(xmax)
 
-            dom_ymax = ET.SubElement(bndbox, 'ymax')
-            dom_ymax.text = str(ymax)
+
+            truncated = add_element(obj,'truncated',  '0')
+
+
+            difficult = add_element(obj,'difficult',  '0')
+
+
+
+            bndbox = add_element(obj,'bndbox',  '')
+
+           
+            
+            dom_xmin = add_element(bndbox,'xmin',  str(xmin))
+
+            dom_ymin = add_element(bndbox,'ymin',  str(ymin))
+
+            dom_xmax = add_element(bndbox,'xmax',  str(xmax))
+
+            dom_ymax = add_element(bndbox,'ymax',  str(ymax))
+
+         
 
 
 
