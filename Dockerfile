@@ -44,15 +44,16 @@ RUN dpkg -i libcudnn7_7.5.0.56-1+cuda10.0_amd64.deb
 RUN dpkg -i libcudnn7-dev_7.5.0.56-1+cuda10.0_amd64.deb
 
 # tensorflow and object detection api installation
-RUN pip install tensorflow-gpu==1.14
+RUN apt-get install -y protobuf-compiler python-pil python-lxml python-tk python3-pip
+
+RUN pip3 install tensorflow-gpu==1.14
 RUN mkdir /protoc_3.3 && \
     cd protoc_3.3 && \
     wget https://github.com/google/protobuf/releases/download/v3.3.0/protoc-3.3.0-linux-x86_64.zip && \
     chmod 775 protoc-3.3.0-linux-x86_64.zip && \
     unzip protoc-3.3.0-linux-x86_64.zip
 
-RUN apt-get install -y protobuf-compiler python-pil python-lxml python-tk
-RUN pip install --user Cython contextlib2 pillow lxml matplotlib pandas numpy==1.17
+RUN pip3 install Cython contextlib2 pillow lxml matplotlib pandas numpy==1.17 scipy tf_slim
 
 RUN git clone https://github.com/tensorflow/models.git
 Run git clone https://github.com/Danny-Dasilva/Obj_retrain.git

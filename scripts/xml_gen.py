@@ -15,7 +15,7 @@ os.chdir(dname)
 
 def add_element(parent, tag, text):
     elem = ET.SubElement(parent, tag)
-    difficult.text = text
+    elem.text = text
     return elem
 
 
